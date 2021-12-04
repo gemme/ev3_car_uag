@@ -12,7 +12,7 @@ class BasicMotorOperationExample {
 
     public static int DELAY = 2000; //2 Sedonds
 
-    public static final EV3LargeRegulatedMotor mA = new EV3LargeRegulatedMotor(MotorPort.A);
+    public static final EV3LargeRegulatedMotor mA = new EV3LargeRegulatedMotor(MotorPort.C);
 
     public static void main(String[] args) {
 
