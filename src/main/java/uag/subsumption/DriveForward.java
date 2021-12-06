@@ -1,6 +1,9 @@
 package uag.subsumption;
 
+import ev3dev.sensors.ev3.EV3ColorSensor;
+import lejos.robotics.Color;
 import lejos.robotics.RegulatedMotor;
+import lejos.robotics.SampleProvider;
 import lejos.robotics.subsumption.Behavior;
 
 public class DriveForward  implements Behavior {
@@ -9,16 +12,25 @@ public class DriveForward  implements Behavior {
 
     private final RegulatedMotor motorLeft;
     private final RegulatedMotor motorRight;
+    private final EV3ColorSensor colorSensor;
 
     public DriveForward(
             final RegulatedMotor motorLeft,
-            final RegulatedMotor motorRight) {
+            final RegulatedMotor motorRight,
+            final EV3ColorSensor colorSensor
+) {
         this.motorLeft = motorLeft;
         this.motorRight = motorRight;
+        this.colorSensor = colorSensor;
     }
 
     public boolean takeControl() {
-        return true;
+        SampleProvider sp = colorSensor.getColorIDMode();
+        int sampleSize = sp.sampleSize();
+        float [] sample = new float[sampleSize];
+        sp.fetchSample(sample, 0);
+        int color = (int)sample[0];
+        return color ==  Color.BLACK;
     }
 
     public void suppress() {

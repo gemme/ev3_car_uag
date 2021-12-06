@@ -33,7 +33,7 @@ public class Ev3Robot {
 
         EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S1);
 
-        Behavior b1 = new DriveForward(motorLeft, motorRight);
+        Behavior b1 = new DriveForward(motorLeft, motorRight, colorSensor);
         Behavior b2 = new HitWallColorSensor(motorLeft, motorRight, colorSensor);
         Behavior []bArray = {b1, b2};
         Arbitrator arby = new Arbitrator(bArray);
